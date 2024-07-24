@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card mx-auto mt-4" style="width: 76rem;">
+    <div class="card-body">
+        <h5 class="card-title mb-3">All Event Proposals</h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Event Type</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Admin Response</th>
+                    <th scope="col">Date Created</th>
+                    <!-- <th scope="col">Action</th> -->
+                </tr>
+            </thead>
+            <tbody>
+               {% for event in events %}
+                    <tr>
+                        <td>{{ event.title }}</td>
+                        <td>{{ event.description }}</td>
+                        <td>{{ event.type }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.end_date }}</td>
+                        {% if event.status == 'Pending' %}
+                        <td>
+                            <span class="badge bg-warning">Pending</span>
+                        </td>
+                        {% elif event.status == 'decline' %}
+                        <td>
+                            <span class="badge bg-danger">Declined</span>
+                        </td>
+                        {% elif event.status == 'approve' %}
+                        <td>
+                            <span class="badge bg-success">Approved</span>
+                        </td>
+                        {% endif %}
+                        {% if event.admin_comment %}
+                        <td>{{ event.admin_comment }}</td>
+                        {% else %}
+                        <td>Nil</td>
+                        {% endif %}
+                        <td>{{ event.date_created }}</td>
+                    </tr>
+               {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

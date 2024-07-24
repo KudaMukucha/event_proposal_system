@@ -1,0 +1,25 @@
+
+{%extends 'base.html'%}
+{%load  widget_tweaks%}
+
+
+{%block content%}
+<form class="mx-auto container mt-2" method="post">
+    {%csrf_token%}
+    <h5>Respond to event proposal from {{event.user}}</h5>
+    <hr>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label"> Status </label>
+      {%render_field form.status class="form-control"  %}
+      <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Additional Statement</label>
+      {%render_field form.admin_comment class="form-control"  %}
+    </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+{%endblock%}
